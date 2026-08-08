@@ -349,3 +349,32 @@ SCROLLBAR
     background:#0f4c8a;
     transform:translateY(-2px);
 }
+
+.sidebar a {
+    display: block;
+    width: 100%;
+    color: inherit;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.sidebar a {
+    position: relative;
+    z-index: 10;
+    pointer-events: auto;
+}
+
+.sidebar li {
+    cursor: pointer;
+}
+
+.sidebar li:hover,
+.sidebar .setting:hover {
+    opacity: 0.8;
+}
+
+.sidebar .setting a {
+    color: inherit;
+    text-decoration: none;
+}
+
