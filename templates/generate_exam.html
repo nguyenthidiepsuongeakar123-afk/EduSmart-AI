@@ -1,0 +1,1034 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <title>
+        ESA - Sinh đề kiểm tra
+    </title>
+
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/exam.css') }}">
+
+</head>
+
+
+<body>
+
+
+<div class="container">
+
+
+<h1>
+    📝 ESA - Sinh đề kiểm tra
+</h1>
+
+
+
+{% if not has_setting %}
+
+<div class="card warning-card">
+
+
+<h2>
+⚠️ Chưa thiết lập thông tin hệ thống
+</h2>
+
+
+<p>
+ESA chưa có thông tin về Sở GD&ĐT,
+Trường, Tổ chuyên môn và Giáo viên.
+</p>
+
+
+<label>
+
+<input type="radio"
+       name="setting_mode"
+       checked>
+
+Nhập và lưu vào hệ thống
+
+</label>
+
+
+<br>
+
+
+<label>
+
+<input type="radio"
+       name="setting_mode">
+
+Chỉ nhập cho lần này
+
+</label>
+
+
+<br><br>
+
+
+<button type="button">
+
+⚙️ Thiết lập thông tin
+
+</button>
+
+
+</div>
+
+
+{% else %}
+
+
+<div class="card">
+
+
+<h2>
+✅ Thông tin hệ thống
+</h2>
+
+
+<p>
+ESA sẽ sử dụng thông tin đã lưu.
+</p>
+
+
+</div>
+
+
+{% endif %}
+
+
+
+
+
+<form action="/generate_exam"
+      method="POST"
+      enctype="multipart/form-data">
+
+
+
+
+
+<!-- ============================= -->
+<!-- I. CHẾ ĐỘ SINH ĐỀ -->
+<!-- ============================= -->
+
+
+<div class="card">
+
+
+<h2>
+I. Chế độ sinh đề
+</h2>
+
+
+
+<div class="radio-group">
+
+<label>
+<input type="radio"
+       name="mode"
+       value="new"
+       checked>
+🤖 Sinh đề từ đầu
+</label>
+
+<label>
+<input type="radio"
+       name="mode"
+       value="matrix">
+📂 Tải ma trận lên
+</label>
+
+<label>
+<input type="radio"
+       name="mode"
+       value="old_exam">
+📄 Tải đề cũ lên
+</label>
+
+</div>
+
+
+
+</div>
+
+
+
+
+
+
+
+<!-- ============================= -->
+<!-- II. THÔNG TIN ĐỀ -->
+<!-- ============================= -->
+
+
+<div class="card">
+
+
+<h2>
+II. Thông tin đề
+</h2>
+
+
+
+
+<label>
+Môn học
+</label>
+
+
+<select name="subject" id="subject">
+
+
+<option value="Toán">
+Toán
+</option>
+
+
+<option value="Ngữ văn">
+Ngữ văn
+</option>
+
+
+<option value="Tiếng Anh">
+Tiếng Anh
+</option>
+
+
+<option value="Vật lí">
+Vật lí
+</option>
+
+
+<option value="Hóa học">
+Hóa học
+</option>
+
+
+<option value="Sinh học">
+Sinh học
+</option>
+
+
+<option value="Lịch sử">
+Lịch sử
+</option>
+
+
+<option value="Địa lí">
+Địa lí
+</option>
+
+
+<option value="GDKTPL">
+GDKTPL
+</option>
+
+
+<option value="Tin học">
+Tin học
+</option>
+
+
+<option value="CNCN">
+Công nghệ công nghiệp
+</option>
+
+<option value="CNNN">
+Công nghệ nông nghiệp
+</option>
+
+<option value="QPAN">
+Giáo dục Quốc phòng và An ninh
+</option>
+
+
+</select>
+
+
+
+
+
+<label>
+Khối
+</label>
+
+
+<select name="grade" id="grade">
+
+
+<option value="10">
+10
+</option>
+
+
+<option value="11">
+11
+</option>
+
+
+<option value="12">
+12
+</option>
+
+
+</select>
+
+
+
+
+
+<label>
+Học kỳ
+</label>
+
+
+<select name="semester">
+
+
+<option value="1">
+Học kỳ I
+</option>
+
+
+<option value="2">
+Học kỳ II
+</option>
+
+
+</select>
+
+
+
+
+
+<label>
+Hình thức
+</label>
+
+
+<select name="exam_type">
+
+
+<option value="thuong_xuyen">
+Kiểm tra thường xuyên
+</option>
+
+
+<option value="giua_ky">
+Giữa kỳ
+</option>
+
+
+<option value="cuoi_ky">
+Cuối kỳ
+</option>
+
+
+</select>
+
+
+
+
+
+<label>
+Thời gian làm bài (phút)
+</label>
+
+
+<input type="number"
+       name="duration"
+       value="45">
+
+
+
+
+
+<label>
+Năng lực lớp
+</label>
+
+
+<select name="class_level">
+
+
+<option value="Yếu">
+Yếu
+</option>
+
+
+<option value="Trung bình">
+Trung bình
+</option>
+
+
+<option value="Khá">
+Khá
+</option>
+
+
+<option value="Tốt">
+Tốt
+</option>
+
+
+</select>
+
+
+
+
+
+<label>
+Mục tiêu đề
+</label>
+
+
+<select name="purpose">
+
+
+<option value="Ôn tập">
+Ôn tập
+</option>
+
+
+<option value="Kiểm tra">
+Kiểm tra
+</option>
+
+
+<option value="Phân hóa">
+Phân hóa
+</option>
+
+
+<option value="Thi thử">
+Thi thử
+</option>
+
+
+</select>
+
+
+
+</div>
+
+<!-- ============================= -->
+<!-- III. PHẠM VI KIẾN THỨC -->
+<!-- ============================= -->
+
+
+<div class="card">
+
+
+       <h2>
+       III. Phạm vi kiến thức ⭐⭐⭐⭐⭐
+       </h2>
+
+
+       <label>Chọn bài cần sinh đề</label>
+
+       <div class="checkbox-group" id="lesson-list">
+
+       {% for lesson in lessons %}
+
+       <label>
+              <input
+              type="checkbox"
+              name="lesson_scope"
+              value="{{ lesson.id }}">
+
+              <span>{{ lesson.name }}</span>
+       </label>
+
+       {% endfor %}
+
+       </div>
+
+       <small>
+
+              ESA sẽ tự đối chiếu SGK, SGV, Kế hoạch giáo dục và Thư viện tri thức ESA.
+
+       </small>
+
+
+</div>
+
+
+
+
+
+<!-- ============================= -->
+<!-- IV. YÊU CẦU CẦN ĐẠT -->
+<!-- ============================= -->
+
+<div class="card">
+
+    <h2>IV. Yêu cầu cần đạt ⭐⭐⭐⭐⭐</h2>
+
+    <div class="requirement-mode">
+
+        <label>
+            <input
+                type="radio"
+                name="requirement_mode"
+                value="esa"
+                checked
+                onchange="toggleRequirementInput()">
+
+            ESA tự lấy từ Thư viện tri thức ESA
+        </label>
+
+        <label>
+            <input
+                type="radio"
+                name="requirement_mode"
+                value="teacher"
+                onchange="toggleRequirementInput()">
+
+            Giáo viên tự nhập
+        </label>
+
+    </div>
+
+    <div
+        id="teacher-requirement-box"
+        style="display:none;">
+
+        <label for="teacher_requirement">
+            Yêu cầu cần đạt do giáo viên nhập
+        </label>
+
+        <textarea
+            id="teacher_requirement"
+            name="teacher_requirement"
+            rows="6"
+            placeholder="Nhập yêu cầu cần đạt cho đề kiểm tra..."></textarea>
+
+    </div>
+
+    <small>
+        Nếu chọn "ESA tự lấy", hệ thống sẽ tự tìm Yêu cầu cần đạt
+        phù hợp với môn, khối, phạm vi kiến thức và nguồn dữ liệu
+        trong Thư viện tri thức ESA.
+    </small>
+
+</div>
+
+
+
+
+
+
+
+<!-- ============================= -->
+<!-- V. TẢI MA TRẬN VÀ ĐẶC TẢ -->
+<!-- ============================= -->
+
+
+<div class="card">
+
+
+<h2>
+V. Ma trận và bảng đặc tả
+</h2>
+
+
+
+<label>
+📂 Tải ma trận đề
+</label>
+
+
+<input type="file"
+       name="matrix_file"
+       accept=".docx,.xlsx,.pdf">
+
+
+
+
+
+<br><br>
+
+
+
+
+<label>
+📂 Tải bảng đặc tả
+</label>
+
+
+<input type="file"
+       name="spec_file"
+       accept=".docx,.xlsx,.pdf">
+
+
+
+
+
+<br><br>
+
+
+
+<button type="button">
+
+🤖 ESA tạo ma trận
+
+</button>
+
+
+
+<button type="button">
+
+🤖 ESA tạo bảng đặc tả
+
+</button>
+
+
+
+</div>
+
+
+
+
+
+
+<!-- ============================= -->
+<!-- VI. NGUỒN DỮ LIỆU ESA -->
+<!-- ============================= -->
+
+
+<div class="card">
+
+
+<h2>
+VI. Nguồn dữ liệu
+</h2>
+
+
+<label>
+
+<input type="checkbox"
+       name="source_sgk">
+
+
+SGK
+
+
+</label>
+
+
+<br>
+
+
+<label>
+
+<input type="checkbox"
+       name="source_sgv">
+
+
+SGV
+
+
+</label>
+
+
+<br>
+
+
+<label>
+
+<input type="checkbox"
+       name="source_plan">
+
+
+Kế hoạch giáo dục
+
+
+</label>
+
+
+<br>
+
+
+<label>
+
+<input type="checkbox"
+       name="source_department">
+
+
+Kế hoạch tổ chuyên môn
+
+
+</label>
+
+
+<br>
+
+
+<label>
+
+<input type="checkbox"
+       name="source_library">
+
+
+Thư viện tri thức ESA
+
+
+</label>
+
+
+
+</div>
+
+
+
+
+
+
+
+<!-- ============================= -->
+<!-- VII. CHÍNH SÁCH CÂU HỎI -->
+<!-- ============================= -->
+
+
+<div class="card">
+
+
+<h2>
+VII. Chính sách sử dụng câu hỏi
+</h2>
+
+
+
+<select name="question_policy">
+
+
+<option value="new">
+Chỉ dùng câu mới
+</option>
+
+
+<option value="priority"
+selected>
+Ưu tiên câu mới
+</option>
+
+
+<option value="mix">
+Kết hợp câu cũ và mới
+</option>
+
+
+<option value="all">
+Không giới hạn
+</option>
+
+
+</select>
+
+
+</div>
+
+
+
+
+
+
+
+
+<!-- ============================= -->
+<!-- VIII. TRÌNH BÀY -->
+<!-- ============================= -->
+
+
+<div class="card">
+
+
+<h2>
+VIII. Trình bày đề
+</h2>
+
+
+<label>
+Số trang mong muốn
+</label>
+
+
+<input type="number"
+       name="page_number"
+       value="2">
+
+
+
+<label>
+Định dạng công thức
+</label>
+
+
+<select name="formula_format">
+
+
+<option value="Equation">
+Equation
+</option>
+
+
+<option value="LaTeX">
+LaTeX
+</option>
+
+
+</select>
+
+
+
+</div>
+
+
+
+
+
+
+
+
+<!-- ============================= -->
+<!-- IX. XUẤT ĐỀ -->
+<!-- ============================= -->
+
+
+<div class="card">
+
+
+<h2>
+IX. Xuất đề
+</h2>
+
+
+
+<label>
+
+<input type="checkbox"
+       name="export_format"
+       value="word"
+       checked>
+
+
+📄 Word
+
+
+</label>
+
+
+
+<br>
+
+
+<label>
+
+<input type="checkbox"
+       name="export_format"
+       value="pdf">
+
+
+📕 PDF
+
+
+</label>
+
+
+
+<br>
+
+
+<label>
+
+<input type="checkbox"
+       name="export_format"
+       value="link">
+
+
+🔗 Link
+
+
+</label>
+
+
+
+</div>
+
+
+
+
+
+
+
+<br>
+
+
+
+<button type="submit">
+
+🚀 ESA Sinh đề
+
+</button>
+
+
+
+</form>
+
+
+
+</div>
+
+
+
+
+
+
+
+
+<script>
+
+
+function showRequirement(){
+
+    document.getElementById(
+        "requirement_box"
+    ).style.display="block";
+
+}
+
+
+
+function hideRequirement(){
+
+    document.getElementById(
+        "requirement_box"
+    ).style.display="none";
+
+}
+
+
+
+</script>
+
+<script>
+
+const lessonData = {
+    "Vật lí": {
+        "10": [
+            {id: 101, name: "Bài 1. Mở đầu"},
+            {id: 102, name: "Bài 2. Động học"},
+            {id: 103, name: "Bài 3. Chuyển động thẳng"},
+            {id: 104, name: "Bài 4. Chuyển động biến đổi"}
+        ],
+
+        "11": [
+            {id: 201, name: "Bài 1. Dao động điều hòa"},
+            {id: 202, name: "Bài 2. Sóng cơ"},
+            {id: 203, name: "Bài 3. Điện trường"}
+        ],
+
+        "12": [
+            {id: 301, name: "Bài 1. Cấu trúc của chất. Sự chuyển thể"},
+            {id: 302, name: "Bài 2. Nội năng"},
+            {id: 303, name: "Bài 3. Nhiệt động lực học"},
+            {id: 304, name: "Bài 4. Khí lí tưởng"},
+            {id: 305, name: "Bài 5. Định luật Boyle"}
+        ]
+    }
+};
+
+function updateLessonList() {
+
+    const subject =
+        document.getElementById("subject").value;
+
+    const grade =
+        document.getElementById("grade").value;
+
+    const lessonList =
+        document.getElementById("lesson-list");
+
+    lessonList.innerHTML = "";
+
+    const lessons =
+        lessonData[subject]?.[grade] || [];
+
+    if (lessons.length === 0) {
+
+        lessonList.innerHTML =
+            "<small>Chưa có dữ liệu bài học cho lựa chọn này.</small>";
+
+        return;
+    }
+
+    lessons.forEach(function(lesson) {
+
+        const label =
+            document.createElement("label");
+
+        label.innerHTML = `
+            <input
+                type="checkbox"
+                name="lesson_scope"
+                value="${lesson.id}">
+
+            <span>${lesson.name}</span>
+        `;
+
+        lessonList.appendChild(label);
+
+    });
+}
+
+document
+    .getElementById("subject")
+    .addEventListener("change", updateLessonList);
+
+
+document
+    .getElementById("grade")
+    .addEventListener("change", updateLessonList);
+
+
+function toggleRequirementInput() {
+
+    const mode =
+        document.querySelector(
+            'input[name="requirement_mode"]:checked'
+        ).value;
+
+    const box =
+        document.getElementById(
+            "teacher-requirement-box"
+        );
+
+    if (mode === "teacher") {
+
+        box.style.display = "block";
+
+    } else {
+
+        box.style.display = "none";
+
+        document.getElementById(
+            "teacher_requirement"
+        ).value = "";
+
+    }
+}
+
+
+</script>
+
+</body>
+
+</html>

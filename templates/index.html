@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>EduSmart AI (ESA)</title>
+
+    <link rel="stylesheet"
+        href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body>
+
+    <!-- HEADER -->
+    <header class="header">
+
+        <h1>EduSmart AI (ESA)</h1>
+
+        <p class="slogan">
+            Đồng hành cùng giáo viên - Vì sự tiến bộ của học sinh
+        </p>
+
+        <div class="status">
+            🟢 AI sẵn sàng
+        </div>
+
+    </header>
+
+
+    <!-- NỘI DUNG CHÍNH -->
+    <main class="container">
+
+        <!-- MENU -->
+        <aside class="sidebar">
+
+            <h3>MENU</h3>
+
+            <ul>
+
+                <li>🏠 Trang chủ</li>
+
+                <li>📖 Soạn giáo án</li>
+
+                <li>📝 Kiểm tra - Đánh giá</li>
+
+                <li>👨‍🎓 Hồ sơ học tập</li>
+
+                <li>💡 Hỗ trợ</li>
+
+                <li>📚 Thư viện tri thức ESA</li>
+
+            </ul>
+
+            <div class="setting">
+
+                ⚙️ Cài đặt
+
+            </div>
+
+        </aside>
+
+
+
+        <!-- CHAT -->
+        <section class="chat">
+
+            <h2>Xin chào!</h2>
+
+            <h1>Bạn cần ESA hỗ trợ gì hôm nay?</h1>
+
+            <textarea
+                placeholder="Ví dụ: Hãy soạn giáo án Vật lí 12 theo Công văn 5512..."></textarea>
+
+            <button>Gửi</button>
+
+            <h3>Công việc gần đây</h3>
+
+            <div class="recent">
+
+                Chưa có dữ liệu
+
+            </div>
+
+        </section>
+
+
+
+        <!-- CỘT PHẢI -->
+        <aside class="right">
+
+            <div class="card">
+
+                <h3>📅 Lịch</h3>
+
+            </div>
+
+            <div class="card">
+
+                <h3>🔔 Nhắc việc</h3>
+
+            </div>
+
+            <div class="card">
+
+                <h3>📢 Thông báo</h3>
+
+            </div>
+
+        </aside>
+
+    </main>
+
+<script src="{{ url_for('static', filename='js/app.js') }}"></script>
+
+</body>
+
+</html>

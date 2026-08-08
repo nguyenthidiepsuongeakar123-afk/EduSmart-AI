@@ -1,0 +1,375 @@
+/* ===========================
+   ESA Library
+=========================== */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Segoe UI, Arial, sans-serif;
+}
+
+body{
+
+    background:#edf2f7;
+
+}
+
+.library-container{
+
+    width:100%;
+    height:100vh;
+
+    display:flex;
+    flex-direction:column;
+
+}
+
+/* ===========================
+HEADER
+=========================== */
+
+.library-header{
+
+    background:#0f4c81;
+
+    color:white;
+
+    padding:18px 25px;
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+}
+
+.title{
+
+    font-size:28px;
+
+    font-weight:bold;
+
+}
+
+.header-buttons button{
+
+    margin-left:10px;
+
+}
+
+/* ===========================
+SEARCH
+=========================== */
+
+.search-bar{
+
+    background:white;
+
+    padding:15px;
+
+}
+
+.search-bar input{
+
+    width:100%;
+
+    padding:12px;
+
+    font-size:16px;
+
+    border-radius:10px;
+
+    border:1px solid #cccccc;
+
+}
+
+/* ===========================
+3 CỘT
+=========================== */
+
+.library-content{
+
+    flex:1;
+
+    display:flex;
+
+    gap:12px;
+
+    padding:12px;
+
+    overflow:hidden;
+
+}
+
+/* ===========================
+LEFT
+=========================== */
+
+.left-panel{
+
+    flex:0 0 18%;
+
+    background:white;
+
+    border-radius:12px;
+
+    padding:15px;
+
+    overflow:auto;
+
+}
+
+.left-panel h3{
+
+    margin-bottom:15px;
+
+}
+
+.left-panel ul{
+
+    list-style:none;
+
+}
+
+.left-panel li{
+
+    padding:10px;
+
+    border-radius:8px;
+
+    cursor:pointer;
+
+}
+
+.left-panel li:hover{
+
+    background:#eef5ff;
+
+}
+
+/* ===========================
+CENTER
+=========================== */
+
+.center-panel{
+
+    flex:1;
+
+    background:white;
+
+    border-radius:12px;
+
+    padding:15px;
+
+    overflow:auto;
+
+}
+
+.center-panel table{
+
+    width:100%;
+
+    border-collapse:collapse;
+
+    margin-top:10px;
+
+}
+
+.center-panel th{
+
+    background:#0f4c81;
+
+    color:white;
+
+    padding:10px;
+
+}
+
+.center-panel td{
+
+    padding:10px;
+
+    border-bottom:1px solid #dddddd;
+
+}
+
+.center-panel tr:hover{
+
+    background:#f5f9ff;
+
+}
+
+/* ===========================
+RIGHT
+=========================== */
+
+.right-panel{
+
+    flex:0 0 22%;
+
+    background:white;
+
+    border-radius:12px;
+
+    padding:15px;
+
+}
+
+.right-panel p{
+
+    margin-top:10px;
+
+}
+
+.right-panel button{
+
+    width:100%;
+
+    margin-top:10px;
+
+}
+
+/* ===========================
+BUTTON
+=========================== */
+
+button{
+
+    background:#0f4c81;
+
+    color:white;
+
+    border:none;
+
+    border-radius:8px;
+
+    padding:10px;
+
+    cursor:pointer;
+
+}
+
+button:hover{
+
+    background:#1668b2;
+
+}
+
+/* ===========================
+BOTTOM
+=========================== */
+
+.bottom-toolbar{
+
+    background:white;
+
+    padding:15px;
+
+    display:flex;
+
+    justify-content:center;
+
+    gap:20px;
+
+}
+/* ===========================
+   HỘP THOẠI THÊM TÀI LIỆU
+=========================== */
+
+.modal{
+
+    display:none;
+
+    position:fixed;
+
+    top:0;
+    left:0;
+
+    width:100%;
+    height:100%;
+
+    background:rgba(0,0,0,0.4);
+
+    justify-content:center;
+
+    align-items:center;
+
+    z-index:999;
+
+}
+
+.modal-content{
+
+    width:420px;
+
+    background:white;
+
+    border-radius:12px;
+
+    padding:25px;
+
+    box-shadow:0 10px 30px rgba(0,0,0,.25);
+
+}
+
+.modal-content h2{
+
+    margin-bottom:20px;
+
+    text-align:center;
+
+}
+
+.modal-btn{
+
+    width:100%;
+
+    padding:14px;
+
+    margin-bottom:12px;
+
+    font-size:16px;
+
+    border:none;
+
+    border-radius:10px;
+
+    cursor:pointer;
+
+    background:#0f4c81;
+
+    color:white;
+
+}
+
+.modal-btn:hover{
+
+    background:#1565a5;
+
+}
+
+.close-btn{
+
+    width:100%;
+
+    padding:12px;
+
+    border:none;
+
+    border-radius:10px;
+
+    background:#888;
+
+    color:white;
+
+    cursor:pointer;
+
+}
+
+.close-btn:hover{
+
+    background:#666;
+
+}

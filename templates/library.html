@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ESA - Thư viện tri thức</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/library.css') }}">
+</head>
+
+<body>
+
+<div class="library-container">
+
+    <!-- Header -->
+    <div class="library-header">
+
+        <div class="title">
+            📚 THƯ VIỆN TRI THỨC ESA
+        </div>
+
+        <div class="header-buttons">
+
+            <button>🔄 Đồng bộ</button>
+
+            <button>⚙️ Quản lý</button>
+
+        </div>
+
+    </div>
+
+    <!-- Thanh tìm kiếm -->
+
+    <div class="search-bar">
+
+       <div class="search-bar">
+
+    <input
+        type="text"
+        placeholder="🔍 Tìm kiếm giáo án, đề kiểm tra, công văn, SGK..."
+    >
+
+</div>
+
+<div class="library-toolbar">
+
+   <form id="uploadForm"
+        action="/upload"
+        method="POST"
+        enctype="multipart/form-data">
+
+    <input
+        type="file"
+        name="file"
+        id="fileInput"
+        hidden
+        onchange="previewFile()"
+    >
+
+    <button
+        type="button"
+        class="btn-upload"
+        onclick="openModal()">
+
+        ➕ Thêm tài liệu
+
+    </button>
+
+</form>
+
+<!-- Hộp thoại Thêm tài liệu -->
+<div id="uploadModal" class="modal">
+
+    <div class="modal-content">
+
+        <h2>📂 Thêm tài liệu ESA</h2>
+
+        <button class="modal-btn" onclick="chooseFile()">
+            📄 Tải từ máy tính
+        </button>
+
+        <button class="modal-btn">
+            📷 Quét bằng camera
+        </button>
+
+        <button class="modal-btn">
+            🌐 Thêm từ đường dẫn
+        </button>
+
+        <button class="close-btn" onclick="closeModal()">
+            Hủy
+        </button>
+
+    </div>
+
+</div>
+
+  
+
+    <!-- Nội dung -->
+
+    <div class="library-content">
+
+        <!-- Cột 1 -->
+
+        <div class="left-panel">
+
+            <h3>📚 THƯ VIỆN TRI THỨC ESA</h3>
+
+           <ul class="tree-menu">
+
+                <li class="tree-root">
+                    ▼ 📚 <b>Tri thức hệ thống</b>
+                </li>
+
+                {% for folder in folders %}
+
+                    {% if folder[3] == "system" %}
+
+                        <li class="tree-child">
+
+                            📁 {{ folder[1] }}
+
+                        </li>
+
+                    {% endif %}
+
+                {% endfor %}
+
+                <br>
+
+                <li class="tree-root">
+                    ▼ 👤 <b>Tri thức người dùng</b>
+                </li>
+
+                {% for folder in folders %}
+
+                    {% if folder[3] == "user" %}
+
+                        <li class="tree-child">
+
+                            📁 {{ folder[1] }}
+
+                        </li>
+
+                    {% endif %}
+
+                {% endfor %}
+
+            /ul>
+
+        </div>
+
+        <!-- Cột 2 -->
+
+        <div class="center-panel">
+
+            <h3>DANH SÁCH TÀI LIỆU</h3>
+
+            <table>
+
+                <thead>
+
+                    <tr>
+
+                        <th>TT</th>
+
+                        <th>Tên tài liệu</th>
+
+                        <th>Loại</th>
+
+                        <th>Môn</th>
+
+                        <th>Ngày</th>
+
+                    </tr>
+
+                </thead>
+
+                <tbody>
+
+                    <tr>
+
+                        <td>🟢</td>
+
+                        <td>Công văn 5512</td>
+
+                        <td>Công văn</td>
+
+                        <td>-</td>
+
+                        <td>01/08/2026</td>
+
+                    </tr>
+
+                    <tr>
+
+                        <td>🔵</td>
+
+                        <td>Giáo án Sóng cơ</td>
+
+                        <td>Giáo án</td>
+
+                        <td>Vật lí</td>
+
+                        <td>03/08/2026</td>
+
+                    </tr>
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+        <!-- Cột 3 -->
+
+        <div class="right-panel">
+
+            <h3>THÔNG TIN TÀI LIỆU</h3>
+            <div id="fileInfo">
+
+                <p>Chưa có tài liệu được chọn.</p>
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+    <!-- Thanh công cụ -->
+
+    <div class="bottom-toolbar">
+
+       
+        <button>🧠 Hỏi Thư viện ESA</button>
+
+    </div>
+
+</div>
+<script>
+
+function openModal(){
+
+    document.getElementById("uploadModal").style.display="flex";
+
+}
+
+function closeModal(){
+
+    document.getElementById("uploadModal").style.display="none";
+
+}
+
+function chooseFile(){
+
+    closeModal();
+
+    setTimeout(function(){
+
+        document.getElementById("fileInput").click();
+
+    },200);
+
+}
+
+function previewFile(){
+
+    const file = document.getElementById("fileInput").files[0];
+
+    if(!file) return;
+
+    const size = (file.size / 1024 / 1024).toFixed(2);
+
+    let type = "Không xác định";
+
+    if(file.name.toLowerCase().endsWith(".pdf"))
+        type = "PDF";
+
+    else if(file.name.toLowerCase().endsWith(".doc") ||
+            file.name.toLowerCase().endsWith(".docx"))
+        type = "Word";
+
+    else if(file.name.toLowerCase().endsWith(".xlsx"))
+        type = "Excel";
+
+    else if(file.name.toLowerCase().endsWith(".ppt") ||
+            file.name.toLowerCase().endsWith(".pptx"))
+        type = "PowerPoint";
+
+    document.getElementById("fileInfo").innerHTML = `
+
+        <h4>📄 Tài liệu đã chọn</h4>
+
+        <p><b>Tên:</b> ${file.name}</p>
+
+        <p><b>Loại:</b> ${type}</p>
+
+        <p><b>Kích thước:</b> ${size} MB</p>
+
+        <hr>
+
+        <p id="aiStatus"
+            style="color:#d97706;font-weight:bold;">
+            🤖 ESA đang phân tích tài liệu...
+        </p>
+
+    `;
+    setTimeout(function(){
+
+    document.getElementById("fileInfo").innerHTML = `
+
+        <h4>📄 Tài liệu đã phân tích</h4>
+
+        <p><b>Tên:</b> ${file.name}</p>
+
+        <p><b>Loại:</b> ${type}</p>
+
+        <p><b>Kích thước:</b> ${size} MB</p>
+
+        <hr>
+
+        <p style="color:green;font-weight:bold;">
+            ✅ ESA đã phân tích xong
+        </p>
+
+        <p><b>Đề xuất lưu:</b> Văn bản pháp quy</p>
+
+        <p><b>Độ tin cậy:</b> 98%</p>
+
+        <button class="modal-btn" onclick="saveToLibrary()">
+            💾 Lưu vào Thư viện
+        </button>
+
+        <button class="close-btn">
+            ❌ Hủy
+        </button>
+
+    `;
+
+},2500);
+
+}
+
+function saveToLibrary(){
+
+    alert("Đã bấm nút Lưu");
+
+    document.getElementById("uploadForm").submit();
+
+}
+</script>
+
+</body>
+</html>
