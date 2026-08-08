@@ -35,31 +35,51 @@
         <!-- MENU -->
         <aside class="sidebar">
 
-            <h3>MENU</h3>
+    <h3>MENU</h3>
 
-            <ul>
+    <ul>
 
-                <li>🏠 Trang chủ</li>
+        <li>
+            <a href="{{ url_for('index') }}">🏠 Trang chủ</a>
+        </li>
 
-                <li>📖 Soạn giáo án</li>
+        <li>
+            <a href="#">📖 Soạn giáo án</a>
+        </li>
 
-                <li>📝 Kiểm tra - Đánh giá</li>
+        <li class="menu-parent">
+            <span>📝 Kiểm tra - Đánh giá</span>
 
-                <li>👨‍🎓 Hồ sơ học tập</li>
+            <ul class="submenu">
+                <li>
+                    <a href="{{ url_for('generate_exam') }}">📝 Sinh đề</a>
+                </li>
 
-                <li>💡 Hỗ trợ</li>
-
-                <li>📚 Thư viện tri thức ESA</li>
-
+                <li>
+                    <a href="#">📊 Chấm bài</a>
+                </li>
             </ul>
+        </li>
 
-            <div class="setting">
+        <li>
+            <a href="#">👨‍🎓 Hồ sơ học tập</a>
+        </li>
 
-                ⚙️ Cài đặt
+        <li>
+            <a href="#">💡 Hỗ trợ</a>
+        </li>
 
-            </div>
+        <li>
+            <a href="#">📚 Thư viện tri thức ESA</a>
+        </li>
 
-        </aside>
+    </ul>
+
+    <div class="setting">
+        ⚙️ Cài đặt
+    </div>
+
+</aside>
 
 
 
